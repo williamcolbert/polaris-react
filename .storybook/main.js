@@ -9,13 +9,12 @@ const postcssShopify = require('@shopify/postcss-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 module.exports = {
-  stories: ['../playground/stories.tsx', '../src/components/**/*/README.md'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-a11y',
-    '@storybook/addon-contexts',
-    '@storybook/addon-knobs',
+  stories: [
+    '../playground/stories.tsx',
+    '../src/components/**/*/README.md',
+    '../src/**/*.stories.{tsx,mdx}',
   ],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
   webpackFinal: (config) => {
     const isProduction = config.mode === 'production';
 

@@ -1,91 +1,87 @@
 import React from 'react';
 import {addParameters, addDecorator} from '@storybook/react';
-import {withContexts} from '@storybook/addon-contexts/react';
-import {color, withKnobs} from '@storybook/addon-knobs';
 import DefaultThemeColors from '@shopify/polaris-tokens/dist-modern/theme/base.json';
 
 import {AppProvider} from '../src';
 import enTranslations from '../locales/en.json';
 
 export const parameters = {
+  actions: {argTypesRegex: '^on.*'},
   percy: {
     skip: true,
     widths: [375, 1280],
   },
 };
 
-function StrictModeToggle({isStrict = false, children}) {
-  const Wrapper = isStrict ? React.StrictMode : React.Fragment;
-  return <Wrapper>{children}</Wrapper>;
+export const decorators = [StrictModeDecorator, AppProviderDecorator];
+
+export const globalTypes = {
+  strictMode: {
+    name: 'Strict mode',
+    defaultValue: false,
+    toolbar: {
+      items: [
+        {title: 'Disabled', value: false},
+        {title: 'Enabled', value: true},
+      ],
+    },
+  },
+  designLanguage: {
+    name: 'New Design Language',
+    description: 'New DL',
+    defaultValue: 'off',
+    toolbar: {
+      items: [
+        {title: 'Disabled', value: 'off'},
+        {title: 'Enabled - Light Mode', value: 'light'},
+        {title: 'Enabled - Dark Mode', value: 'dark'},
+      ],
+    },
+  },
+};
+
+function StrictModeDecorator(Story, context) {
+  const Wrapper = context.globals.strictMode
+    ? React.StrictMode
+    : React.Fragment;
+
+  return (
+    <Wrapper>
+      <Story {...context} />
+    </Wrapper>
+  );
 }
 
-function AppProviderWithKnobs(
-  {newDesignLanguage, colorScheme, children},
-  context,
-) {
-  const omitAppProvider = (() => {
-    try {
-      return children.props['data-omit-app-provider'];
-    } catch (e) {
-      return null;
-    }
-  })();
+function AppProviderDecorator(Story, context) {
+  const dlConfig = {
+    off: {newDesignLanguage: false},
+    light: {newDesignLanguage: true, colorScheme: 'light'},
+    dark: {newDesignLanguage: true, colorScheme: 'dark'},
+  }[context.globals.designLanguage];
 
-  if (omitAppProvider === 'true') return children;
+  if (context.args.omitAppProvider) return <Story {...context} />;
 
-  const colors = Object.entries(DefaultThemeColors).reduce(
-    (accumulator, [key, value]) => ({
-      ...accumulator,
-      [key]: strToHex(color(key, value, 'Theme')),
-    }),
-    {},
-  );
+  // const colors = Object.entries(DefaultThemeColors).reduce(
+  //   (accumulator, [key, value]) => ({
+  //     ...accumulator,
+  //     [key]: strToHex(color(key, value, 'Theme')),
+  //   }),
+  //   {},
+  // );
 
   return (
     <AppProvider
       i18n={enTranslations}
-      features={{newDesignLanguage}}
+      features={{newDesignLanguage: dlConfig.newDesignLanguage}}
       theme={{
-        colors,
-        colorScheme,
+        //   colors,
+        colorScheme: dlConfig.colorScheme,
       }}
     >
-      {children}
+      <Story {...context} />
     </AppProvider>
   );
 }
-
-const withContextsDecorator = withContexts([
-  {
-    title: 'Strict Mode',
-    components: [StrictModeToggle],
-    params: [
-      {name: 'Disabled', props: {isStrict: false}},
-      {name: 'Enabled', default: true, props: {isStrict: true}},
-    ],
-  },
-  {
-    title: 'New Design Language',
-    components: [AppProviderWithKnobs],
-    params: [
-      {
-        name: 'Disabled',
-        default: true,
-        props: {newDesignLanguage: false},
-      },
-      {
-        name: 'Enabled - Light Mode',
-        props: {newDesignLanguage: true, colorScheme: 'light'},
-      },
-      {
-        name: 'Enabled - Dark Mode',
-        props: {newDesignLanguage: true, colorScheme: 'dark'},
-      },
-    ],
-  },
-]);
-
-export const decorators = [withContextsDecorator];
 
 function strToHex(str) {
   if (str.charAt(0) === '#') return str;
