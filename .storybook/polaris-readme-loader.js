@@ -76,6 +76,12 @@ ${example.storyName}.parameters = {
 `.trim();
     });
 
+    if (readme.sbComponent) {
+      csfExports.unshift(
+        `export const WithArgs = (args) => <${readme.sbComponent} {...args} />;`,
+      );
+    }
+
     csfExports.unshift(`export function AllExamples() {
   return (
     <React.Fragment>
@@ -96,6 +102,14 @@ AllExamples.parameters = {
 
   return `
 import React, {${hooks}} from 'react';
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Props,
+  Stories,
+  Meta, AddContext } from "@storybook/addon-docs/blocks";
 import {
   AccountConnection,
   ActionList,
@@ -246,7 +260,28 @@ import {
   ViewMinor,
 } from '@shopify/polaris-icons';
 
-export default { title: ${JSON.stringify(`All Components/${readme.name}`)} };
+export default {
+  title: ${JSON.stringify(`All Components/${readme.name}`)},
+  component: ${readme.sbComponent},
+  parameters: {
+    docs: {
+      page: () => {
+        return (<>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Props />
+          <Stories />
+
+          <div dangerouslySetInnerHTML={{__html: ${JSON.stringify(
+            readme.docHtml,
+          )}}} />
+        </>);
+      },
+    }
+  }
+};
 
 ${csfExports.join('\n\n')}
 `;
@@ -282,6 +317,8 @@ function parseCodeExamples(data) {
 
   return {
     name: matter.data.name,
+    sbComponent: matter.data.sbComponent,
+    docHtml: new MdParser().parse(matter.content),
     category: matter.data.category,
     examples: generateExamples(matter),
     omitAppProvider: matter.data.omitAppProvider || false,

@@ -1,6 +1,7 @@
 ---
 name: Button
 category: Actions
+sbComponent: Button
 platforms:
   - android
   - ios
