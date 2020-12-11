@@ -9,18 +9,16 @@
   border: 0;
   font-size: inherit;
   color: var(--p-interactive, color('blue'));
-  text-decoration: none;
+  text-decoration: underline;
   cursor: pointer;
 
   &:hover {
     color: var(--p-interactive-hovered, color('blue', 'dark'));
-    text-decoration: underline;
   }
 
   &:focus {
     $chrome-default-outline: rgba(0, 103, 244, 0.247) auto rem(4.5px);
     outline: var(--p-override-none, $chrome-default-outline);
-    text-decoration: underline;
   }
 
   &:focus:not(:active) {
@@ -30,7 +28,6 @@
   &:active {
     position: relative;
     color: var(--p-interactive-pressed, color('blue', 'dark'));
-    text-decoration: underline;
 
     &::before {
       content: var(--p-non-null-content, none);
@@ -68,7 +65,6 @@
 
 .monochrome {
   color: inherit;
-  text-decoration: underline;
 
   &:hover,
   &:focus,
@@ -77,6 +73,6 @@
   }
 }
 
-.underline {
-  text-decoration: underline;
+.removeUnderline {
+  text-decoration: none;
 }

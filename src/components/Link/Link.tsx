@@ -21,8 +21,8 @@ export interface LinkProps {
   external?: boolean;
   /** Makes the link color the same as the current text color and adds an underline */
   monochrome?: boolean;
-  /** Adds text decoration underline to the link*/
-  underline?: boolean;
+  /** Removes text decoration underline to the link*/
+  removeUnderline?: boolean;
   /** Callback when a link is clicked */
   onClick?(): void;
 }
@@ -34,7 +34,7 @@ export function Link({
   external,
   id,
   monochrome,
-  underline,
+  removeUnderline,
 }: LinkProps) {
   const i18n = useI18n();
   let childrenMarkup = children;
@@ -66,7 +66,7 @@ export function Link({
           styles.Link,
           shouldBeMonochrome && styles.monochrome,
           newDesignLanguage && styles.newDesignLanguage,
-          underline && styles.underline,
+          removeUnderline && styles.removeUnderline,
         );
 
         return url ? (
