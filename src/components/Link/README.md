@@ -53,6 +53,10 @@ If the existing link styles don’t meet the needs of your project, then use the
 
 The link component should follow the content guidelines for [links](https://polaris.shopify.com/content/actionable-language#section-links).
 
+## Link underlines
+
+<!-- Add some content here -->
+
 ---
 
 ## Examples
@@ -109,6 +113,24 @@ Use for text links that should open in a new browser tab (or window, depending o
 <!-- content-for: web -->
 
 Use the `url` prop to give the link component a valid `href` value. This allows the element to be identified as a link to assistive technologies and gives it default keyboard support.
+
+<!-- Information for link underlines -->
+
+<!-- usageblock -->
+
+#### Do
+
+```jsx
+<Link></Link>
+```
+
+#### Don’t
+
+```jsx
+<Link></Link>
+```
+
+<!-- end -->
 
 ### Submitting data
 
