@@ -30,20 +30,15 @@
   cursor: pointer;
   user-select: none;
   text-decoration: none;
-  transition-property: background, border, box-shadow;
-  transition-duration: var(--p-override-none, duration());
-  transition-timing-function: var(--p-override-none, easing());
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
     background: var(--p-action-secondary-hovered);
-    border-color: color('sky', 'dark');
-    @include ms-high-contrast-outline;
+    @include high-contrast-outline;
   }
 
   &:focus {
     box-shadow: var(--p-button-drop-shadow);
-    border-color: var(--p-border-neutral-subdued);
     outline: 0;
 
     @include focus-ring($style: 'focused');
@@ -51,7 +46,6 @@
 
   &:active {
     background: var(--p-action-secondary-pressed);
-    border-color: color('sky', 'dark');
     box-shadow: var(--p-button-drop-shadow);
 
     &::after {
@@ -246,7 +240,6 @@
   margin: -2px -5px;
   background: $background-color;
   border-radius: border-radius();
-  transition: opacity duration() easing();
 }
 
 @mixin unstyled-button() {
