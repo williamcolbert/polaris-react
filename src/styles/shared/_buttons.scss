@@ -183,26 +183,22 @@
 
     &:hover {
       border: border-width('base') solid var(--p-border-critical);
-      box-shadow: none;
       background: var(--p-surface-critical-subdued);
     }
 
     &:focus {
       border: border-width('base') solid var(--p-border-critical);
-      box-shadow: none;
       @include focus-ring($style: 'focused');
     }
 
     &:active {
       border: border-width('base') solid var(--p-border-critical);
-      box-shadow: none;
       background: var(--p-surface-critical-subdued);
     }
 
     // stylelint-disable-next-line selector-max-class
     &.disabled {
       border: border-width('base') solid var(--p-border-critical-disabled);
-      box-shadow: none;
       background: transparent;
       color: var(--p-interactive-critical-disabled);
     }
@@ -211,7 +207,6 @@
     &.pressed {
       background: var(--p-surface-critical-subdued);
       box-shadow: border-width('base') solid var(--p-border-critical);
-      box-shadow: none;
       color: var(--p-interactive-critical);
     }
   }
