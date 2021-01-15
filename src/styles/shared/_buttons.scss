@@ -118,16 +118,16 @@
 }
 
 @mixin button-filled-disabled($button-color) {
-  @include recolor-icon(color('white'));
-  // Transition gradient to gradient to avoid flicker
-  background: linear-gradient(
-    to bottom,
-    lighten($button-color, 25%),
-    lighten($button-color, 25%)
-  );
+  // @include recolor-icon(color('white'));
+  // // Transition gradient to gradient to avoid flicker
+  // background: linear-gradient(
+  //   to bottom,
+  //   lighten($button-color, 25%),
+  //   lighten($button-color, 25%)
+  // );
   border-color: lighten($button-color, 20%);
   box-shadow: none;
-  color: color('white');
+  // color: color('white');
 }
 
 @mixin button-outline($outline-color, $background-color: transparent) {
@@ -213,20 +213,16 @@
 
 @mixin button-outline-disabled($outline-color) {
   background: transparent;
-  border-color: rgba($outline-color, 0.25);
+  // border-color: rgba($outline-color, 0.25);
   box-shadow: none;
-  color: color('ink', 'lightest');
+  // color: color('ink', 'lightest');
 
-  @include recolor-icon(color('ink', 'lightest'));
+  // @include recolor-icon(color('ink', 'lightest'));
 }
 
 @mixin button-full-width {
   display: flex;
   width: 100%;
-}
-
-@function plain-button-background() {
-  @return rgba(color('ink'), 0.1);
 }
 
 @mixin plain-button-backdrop($background-color: plain-button-background()) {

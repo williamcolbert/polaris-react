@@ -27,7 +27,7 @@ $difference-between-touch-area-and-backdrop: control-height() -
   &:focus,
   &:active {
     &::after {
-      background: plain-button-background();
+      background: orange;
     }
   }
 
