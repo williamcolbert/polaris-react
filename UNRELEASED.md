@@ -4,9 +4,12 @@ Use [the changelog guidelines](https://git.io/polaris-changelog-guidelines) to f
 
 ### Breaking changes
 
+- Remove `light` property from `Tooltip` as it now defaults to a light background ([#3803](https://github.com/Shopify/polaris-react/pull/3803)) ([#3803](https://github.com/Shopify/polaris-react/pull/3803))
 - Made `title` property required in `Modal` for accessibility label, added `hideTitle` property ([#3803](https://github.com/Shopify/polaris-react/pull/3803)) ([#3803](https://github.com/Shopify/polaris-react/pull/3803))
 
 ### Enhancements
+
+- Changed `Label` and `Labelled`’s `label` prop type to `React.ReactNode` instead of `string` ([#3787](https://github.com/Shopify/polaris-react/pull/3787))
 
 ### Bug fixes
 
@@ -45,6 +48,9 @@ Use [the changelog guidelines](https://git.io/polaris-changelog-guidelines) to f
 - Fixed `Collapsible` expand and collapse animation ([#3779](https://github.com/Shopify/polaris-react/pull/3779))
 - Fixed a bug in `Page` where re-rendering of `secondaryActions` could cause layout jittering ([#3641](https://github.com/Shopify/polaris-react/pull/3641))
 - Fixed `ColorPicker` checker background to remain visible on a white background ([#3812](https://github.com/Shopify/polaris-react/pull/3812))
+- Fixed an incorrect translation key for `accessibilityLabel` in `Tooltip`([#3843](https://github.com/Shopify/polaris-react/pull/3843))
+- Fix shadows on filled `Button`s not touching the bottom edge ([#3841](https://github.com/Shopify/polaris-react/pull/3841))
+- Adjust `Thumbnail` icon color to be subdued ([#3846](https://github.com/Shopify/polaris-react/pull/3846))
 
 ### Documentation
 
